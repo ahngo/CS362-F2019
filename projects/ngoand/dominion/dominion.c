@@ -1188,7 +1188,7 @@ int cardEffectBaron(int choice1, struct gameState *state, int currentPlayer, int
         if (supplyCount(estate, state) > 0) 
         {
             gainCard(estate, state, 1, currentPlayer); //Gain an estate
-            state->supplyCount[estate]--;//Decrement Estates
+            //state->supplyCount[estate]--;//Decrement Estates
             if (supplyCount(estate, state) == 0) 
             {
                 isGameOver(state);
@@ -1421,50 +1421,51 @@ int cardEffectTribute(int nextPlayer, struct gameState *state, int handPos, int 
         {
             tributeRevealedCards[1] = -1;
         }
+    }
         
-        // Set arrays to check against tributed cards
-        int treasureCards[] = {copper, silver, gold};
-        int treasureCardsLen = sizeof(treasureCards) / sizeof(int);
-        int victoryCards[] = {estate, duchy, province, gardens, great_hall};
-        int victoryCardsLen = sizeof(victoryCards) / sizeof(int);
-        bool treasureCard = false;
-        bool victoryCard = false;
-        
-        // Tally up bonuses for each tributed card
-        for (int i = 0; i < tributeSlot; i++)
+    // Set arrays to check against tributed cards
+    int treasureCards[] = {copper, silver, gold};
+    int treasureCardsLen = sizeof(treasureCards) / sizeof(int);
+    int victoryCards[] = {estate, duchy, province, gardens, great_hall};
+    int victoryCardsLen = sizeof(victoryCards) / sizeof(int);
+    bool treasureCard = false;
+    bool victoryCard = false;
+    
+    // Tally up bonuses for each tributed card
+    for (int i = 0; i < tributeSlot; i++)
+    {
+        int checkCard = tributeRevealedCards[i];
+        // Ignore curse cards
+        if (checkCard == curse)
         {
-            int checkCard = tributeRevealedCards[i];
-            // Ignore curse cards
-            if (checkCard == curse)
+            continue;
+        }
+        // Check for treasure or victory type
+        treasureCard = false;
+        victoryCard = false;
+        for (int j = 0; j < treasureCardsLen; j++)
+        {
+            if (checkCard == treasureCards[j])
             {
-                continue;
-            }
-            // Check for treasure or victory type
-            treasureCard = false;
-            victoryCard = false;
-            for (int j = 0; j < treasureCardsLen; j++)
-            {
-                if (checkCard == treasureCards[j])
-                {
-                    state->coins += 2;
-                    treasureCard = true;
-                }
-            }
-            for (int k = 0; k < victoryCardsLen; k++)
-            {
-                if (checkCard == victoryCards[k])
-                {
-                    drawCard(currentPlayer, state);
-                    victoryCard = true;
-                }
-            }
-            // Action card if not treasure or victory
-            if (treasureCard == false && victoryCard == false)
-            {
-                state->numActions = state->numActions + 2;
+                state->coins += 2;
+                treasureCard = true;
             }
         }
+        for (int k = 0; k < victoryCardsLen; k++)
+        {
+            if (checkCard == victoryCards[k])
+            {
+                drawCard(currentPlayer, state);
+                victoryCard = true;
+            }
+        }
+        // Action card if not treasure or victory
+        if (treasureCard == false && victoryCard == false)
+        {
+            state->numActions = state->numActions + 2;
+        }
     }
+    
     discardCard(handPos, currentPlayer, state, 0);
     return 0;
 }
@@ -1477,7 +1478,7 @@ int cardEffectMine(int currentPlayer, int choice1, int choice2, struct gameState
     int chosenCardToGain = choice2;
     
     // Check proper cost between cards to trash and gain
-    if (getCost(chosenCardToTrash) + 3 <= getCost(chosenCardToGain))
+    if (getCost(chosenCardToTrash) + 3 > getCost(chosenCardToGain))
     {
         return -1;
     }
