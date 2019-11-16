@@ -63,5 +63,28 @@ unittestresults: unittest1 unittest2 unittest3 unittest4 unittest5
 testFunc.o:
 	gcc -c testFunc.c
 
+randomtestcard1: randomtestcard1.c dominion.o rngs.o testFunc.o
+	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o testFunc.o $(CFLAGS)
+	
+randomtestcard2: randomtestcard2.c dominion.o rngs.o testFunc.o
+	gcc -o randomtestcard2 randomtestcard2.c dominion.o rngs.o testFunc.o $(CFLAGS)
+	
+randomtestcard3: randomtestcard3.c dominion.o rngs.o testFunc.o
+	gcc -o randomtestcard3 randomtestcard3.c dominion.o rngs.o testFunc.o $(CFLAGS)
+
+randomtestresults: randomtestcard1 randomtestcard2 randomtestcard3
+	echo "***** RANDOM TEST RESULTS *****" > randomtestresults.out
+	./randomtestcard1 >> randomtestresults.out
+	echo "***** BARON TEST CONCLUDED *****" >> randomtestresults.out
+	./randomtestcard2 >> randomtestresults.out 
+	echo "***** MINION TEST CONCLUDED *****" >> randomtestresults.out
+	./randomtestcard3 >> randomtestresults.out
+	echo "***** TRIBUTE TEST CONCLUDED *****" >> randomtestresults.out
+	echo "***** GCOV BRANCH/FUNCTION COVERAGE RESULTS *****" >> randomtestresults.out
+	gcov -b -f dominion.c >> randomtestresults.out
+	echo "***** dominion.c.gcov CONTENTS *****" >> randomtestresults.out
+	cat dominion.c.gcov >> randomtestresults.out
+	
+
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
