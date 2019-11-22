@@ -1,0 +1,1 @@
+int verify(char* purpose, int check);
