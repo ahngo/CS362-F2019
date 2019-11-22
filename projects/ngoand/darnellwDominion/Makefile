@@ -85,7 +85,7 @@ randomtestresults: randomtestcard1 randomtestcard2 randomtestcard3
 	echo "***** dominion.c.gcov CONTENTS *****" >> randomtestresults.out
 	cat dominion.c.gcov >> randomtestresults.out
 	
-alltests: unittest1 unittest2 unittest3 unittest4 unittest5 randomtestcard1 randomtestcard2 randomtestcard3
+alltests: unittest1 unittest2 unittest3 unittest4 unittest5 randomtestcard1 randomtestcard2 randomtestcard3 dominion.o
 	echo "***** UNIT TEST RESULTS *****" > alltestresults.out
 	./unittest1 >> alltestresults.out
 	./unittest2 >> alltestresults.out
