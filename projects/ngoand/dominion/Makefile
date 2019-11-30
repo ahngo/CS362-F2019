@@ -32,7 +32,61 @@ bugtest1: bugtest1.c dominion.o rngs.o testFunc.o
 	
 bugtest1fix: bugtest1.c dominionfix.o rngs.o testFunc.o
 	gcc -o bugtest1fix -g bugtest1.c dominionfix.o rngs.o testFunc.o $(CFLAGS)
+	
+bugtest2: bugtest2.c dominion.o rngs.o testFunc.o
+	gcc -o bugtest2 -g bugtest2.c dominion.o rngs.o testFunc.o $(CFLAGS)
 
+bugtest2fix: bugtest1.c dominionfix.o rngs.o testFunc.o
+	gcc -o bugtest2fix -g bugtest2.c dominionfix.o rngs.o testFunc.o $(CFLAGS)
+	
+bugtest3: bugtest3.c dominion.o rngs.o testFunc.o
+	gcc -o bugtest3 -g bugtest3.c dominion.o rngs.o testFunc.o $(CFLAGS)
+
+bugtest3fix: bugtest3.c dominionfix.o rngs.o testFunc.o
+	gcc -o bugtest3fix -g bugtest3.c dominionfix.o rngs.o testFunc.o $(CFLAGS)
+	
+bugtest4: bugtest4.c dominion.o rngs.o testFunc.o
+	gcc -o bugtest4 -g bugtest4.c dominion.o rngs.o testFunc.o $(CFLAGS)
+    
+bugtest4fix: bugtest4.c dominionfix.o rngs.o testFunc.o
+	gcc -o bugtest4fix -g bugtest4.c dominionfix.o rngs.o testFunc.o $(CFLAGS)
+	
+bugtest5: bugtest5.c dominion.o rngs.o testFunc.o
+	gcc -o bugtest5 -g bugtest5.c dominion.o rngs.o testFunc.o $(CFLAGS)
+    
+bugtest5fix: bugtest5.c dominionfix.o rngs.o testFunc.o
+	gcc -o bugtest5fix -g bugtest5.c dominionfix.o rngs.o testFunc.o $(CFLAGS)
+
+bugtest6: bugtest6.c dominion.o rngs.o testFunc.o
+	gcc -o bugtest6 -g bugtest6.c dominion.o rngs.o testFunc.o $(CFLAGS)
+    
+bugtest6fix: bugtest6.c dominionfix.o rngs.o testFunc.o
+	gcc -o bugtest6fix -g bugtest6.c dominionfix.o rngs.o testFunc.o $(CFLAGS)
+
+bugtest7: bugtest7.c dominion.o rngs.o testFunc.o
+	gcc -o bugtest7 -g bugtest7.c dominion.o rngs.o testFunc.o $(CFLAGS)
+    
+bugtest7fix: bugtest7.c dominionfix.o rngs.o testFunc.o
+	gcc -o bugtest7fix -g bugtest7.c dominionfix.o rngs.o testFunc.o $(CFLAGS)
+
+bugtest8: bugtest8.c dominion.o rngs.o testFunc.o
+	gcc -o bugtest8 -g bugtest8.c dominion.o rngs.o testFunc.o $(CFLAGS)
+    
+bugtest8fix: bugtest8.c dominionfix.o rngs.o testFunc.o
+	gcc -o bugtest8fix -g bugtest8.c dominionfix.o rngs.o testFunc.o $(CFLAGS)
+
+bugtest9: bugtest9.c dominion.o rngs.o testFunc.o
+	gcc -o bugtest9 -g bugtest9.c dominion.o rngs.o testFunc.o $(CFLAGS)
+    
+bugtest9fix: bugtest9.c dominionfix.o rngs.o testFunc.o
+	gcc -o bugtest9fix -g bugtest9.c dominionfix.o rngs.o testFunc.o $(CFLAGS)
+
+bugtest10: bugtest10.c dominion.o rngs.o testFunc.o
+	gcc -o bugtest10 -g bugtest10.c dominion.o rngs.o testFunc.o $(CFLAGS)
+    
+bugtest10fix: bugtest10.c dominionfix.o rngs.o testFunc.o
+	gcc -o bugtest10fix -g bugtest10.c dominionfix.o rngs.o testFunc.o $(CFLAGS)
+	
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
 
