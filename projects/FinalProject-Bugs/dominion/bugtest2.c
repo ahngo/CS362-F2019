@@ -15,6 +15,8 @@
 
 int main() 
 {
+    printf("Testing Bug #2: Mine has improper cost comparison\n");
+    
     // initialize game variables, state and test state
     int seed = 1000;
     int numPlayers = 2;
@@ -39,7 +41,6 @@ int main()
     
     // Play Mine: trash Copper in hand slot 1 to gain Copper
     
-    printf("Testing Bug #2: Mine has improper cost comparison\n");
     int test = cardEffect(mine, choice1, choice2, choice3, &testG, handpos, &bonus);
     verify("Trash Copper to gain Copper", test != -1);
 

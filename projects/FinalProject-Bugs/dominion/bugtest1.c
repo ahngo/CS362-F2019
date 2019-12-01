@@ -15,6 +15,8 @@
 
 int main() 
 {
+    printf("Testing Bug #1: Mine has improper flag passed to discardCard()\n");
+    
     // initialize game variables, state and test state
     int seed = 1000;
     int numPlayers = 2;
@@ -39,7 +41,7 @@ int main()
     
     // Play Mine: trash Copper in hand slot 1 to gain Silver
     
-    printf("Testing Bug #1: Mine has improper flag passed to discardCard()\n");
+    
     int test = cardEffect(mine, choice1, choice2, choice3, &testG, handpos, &bonus);
     verify("Playing the card was successful", test != -1);
     
