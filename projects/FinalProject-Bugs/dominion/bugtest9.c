@@ -40,7 +40,7 @@ int main()
     memcpy(&testG, &G, sizeof(struct gameState));
     // Play Tribute: should get 2 coins, no actions and no cards
     cardEffect(tribute, choice1, choice2, choice3, &testG, handpos, &bonus);
-    verify("Tribute grants proper coins", testG.coins = G.coins + 2);
+    verify("Tribute grants proper coins", testG.coins == G.coins + 2);
     verify("Tribute should not grant bonus actions", testG.numActions == 1);
 	return 0;
 }
