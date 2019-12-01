@@ -401,7 +401,7 @@ int isGameOver(struct gameState *state) {
 
     //if three supply pile are at 0, the game ends
     j = 0;
-    for (i = 0; i < 25; i++)
+    for (i = 0; i <= 26; i++)
     {
         if (state->supplyCount[i] == 0)
         {
@@ -467,7 +467,7 @@ int scoreFor (int player, struct gameState *state) {
     }
 
     //score from deck
-    for (i = 0; i < state->discardCount[player]; i++)
+    for (i = 0; i < state->deckCount[player]; i++)
     {
         if (state->deck[player][i] == curse) {
             score = score - 1;
@@ -818,7 +818,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
             return -1;
         }
 
-        if ( (getCost(state->hand[currentPlayer][choice1]) + 3) > getCost(choice2) )
+        if ( (getCost(state->hand[currentPlayer][choice1]) + 3) < getCost(choice2) )
         {
             return -1;
         }
@@ -843,7 +843,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
     case remodel:
         j = state->hand[currentPlayer][choice1];  //store card we will trash
 
-        if ( (getCost(state->hand[currentPlayer][choice1]) + 2) > getCost(choice2) )
+        if ( (getCost(state->hand[currentPlayer][choice1]) + 2) < getCost(choice2) )
         {
             return -1;
         }
@@ -1068,7 +1068,8 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
             tributeRevealedCards[1] = -1;
         }
 
-        for (i = 0; i <= 2; i ++) {
+        for (i = 0; i < 2; i ++) {
+            
             if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
                 state->coins += 2;
             }
@@ -1078,7 +1079,11 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
                 drawCard(currentPlayer, state);
             }
             else { //Action Card
-                state->numActions = state->numActions + 2;
+            
+                if (tributeRevealedCards[i] != -1)
+                {
+                     state->numActions = state->numActions + 2;
+                }
             }
         }
 
@@ -1096,10 +1101,12 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         {
             return -1;
         }
-
+        
+        int cardToReturn = state->hand[currentPlayer][choice1];
+        
         for (i = 0; i < state->handCount[currentPlayer]; i++)
         {
-            if (i != handPos && i == state->hand[currentPlayer][choice1] && i != choice1)
+            if (i != handPos && state->hand[currentPlayer][i] == cardToReturn)
             {
                 j++;
             }
